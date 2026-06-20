@@ -1,11 +1,466 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Blockmania</title>
-  </head>
-  <body>
-    hello there
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Block Mania</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --panel-bg: rgba(30, 41, 59, 0.4);
+            --panel-border: rgba(255, 255, 255, 0.08);
+            --primary-glow: rgba(34, 197, 94, 0.15);
+            --secondary-glow: rgba(59, 130, 246, 0.15);
+            --accent-green: #22c55e;
+            --accent-blue: #3b82f6;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --sidebar-width: 280px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Glowing Backgrounds */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(120px);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        body::before {
+            top: -100px;
+            left: -100px;
+            background: var(--primary-glow);
+        }
+
+        body::after {
+            bottom: 10% ;
+            right: -100px;
+            background: var(--secondary-glow);
+        }
+
+        /* Decorative Grid Overlay (matching Block Blast style) */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            display: flex;
+            gap: 40px;
+        }
+
+        /* Header Styling */
+        header {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 24px 20px;
+            text-align: center;
+        }
+
+        .logo-container {
+            display: inline-flex;
+            gap: 6px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .logo-block {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-block.green { background-color: var(--accent-green); box-shadow: 0 0 15px rgba(34, 197, 94, 0.4); }
+        .logo-block.blue { background-color: var(--accent-blue); box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+        .logo-block.yellow { background-color: #eab308; box-shadow: 0 0 15px rgba(234, 179, 8, 0.4); }
+        .logo-block.red { background-color: #ef4444; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff 40%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .last-updated {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: var(--sidebar-width);
+            flex-shrink: 0;
+            position: sticky;
+            top: 40px;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .nav-card {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 20px;
+            padding: 24px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .nav-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-item a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: block;
+            padding: 6px 12px;
+            border-radius: 8px;
+            border-left: 2px solid transparent;
+        }
+
+        .nav-item a:hover {
+            color: var(--accent-green);
+            background-color: rgba(34, 197, 94, 0.06);
+            border-left-color: var(--accent-green);
+            padding-left: 16px;
+        }
+
+        /* Content Area */
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            max-width: 800px;
+        }
+
+        .section-card {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 24px;
+            padding: 36px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .section-card h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-card h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background-color: var(--accent-green);
+            border-radius: 4px;
+        }
+
+        .section-card:nth-child(2n) h2::before {
+            background-color: var(--accent-blue);
+        }
+
+        .section-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+
+        .section-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .section-card li {
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .section-card li::before {
+            content: '⬩';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        .section-card:nth-child(2n) li::before {
+            color: var(--accent-blue);
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(59, 130, 246, 0.08) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background-color: var(--accent-green);
+            color: #052e16;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 12px 32px;
+            border-radius: 12px;
+            margin-top: 16px;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.45);
+            background-color: #2be06b;
+        }
+
+        /* Footer */
+        footer {
+            width: 100%;
+            padding: 60px 24px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 60px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent-green);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-overlay"></div>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-block green"></div>
+            <div class="logo-block blue"></div>
+            <div class="logo-block yellow"></div>
+            <div class="logo-block red"></div>
+        </div>
+        <h1>Privacy Policy</h1>
+        <div class="subtitle">For the Mobile Application: Block Mania</div>
+        <div class="last-updated">Last Updated: June 21, 2026</div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="nav-card">
+                <div class="nav-title">Sections</div>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#introduction">1. Introduction</a></li>
+                    <li class="nav-item"><a href="#information-collection">2. Information Collection</a></li>
+                    <li class="nav-item"><a href="#how-we-use">3. How We Use Data</a></li>
+                    <li class="nav-item"><a href="#cookies-storage">4. Cookies & Local Storage</a></li>
+                    <li class="nav-item"><a href="#third-party">5. Third-Party Services</a></li>
+                    <li class="nav-item"><a href="#children">6. Children's Privacy</a></li>
+                    <li class="nav-item"><a href="#changes">7. Policy Changes</a></li>
+                    <li class="nav-item"><a href="#contact">8. Contact Us</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Section 1 -->
+            <section id="introduction" class="section-card">
+                <h2>Introduction</h2>
+                <p>Welcome to <strong>Block Mania</strong>. We value your privacy and are committed to protecting any information related to you when you play our game.</p>
+                <p>This Privacy Policy explains how we handle information in Block Mania. By downloading and playing Block Mania, you agree to the practices outlined in this policy.</p>
+            </section>
+
+            <!-- Section 2 -->
+            <section id="information-collection" class="section-card">
+                <h2>Information Collection & Use</h2>
+                <p>We believe in absolute data minimalism. Here is what you should know about the data inside Block Mania:</p>
+                <ul>
+                    <li><strong>No Personal Identification:</strong> We do not collect, request, or store personal identifiers like your real name, physical address, phone number, or government IDs.</li>
+                    <li><strong>Anonymous Gameplay Progress:</strong> When you play Block Mania, your score, high scores, combos, and sound settings are saved directly on your local device. We do not transmit this data to external servers.</li>
+                    <li><strong>Standard Mobile Logs:</strong> Like most applications, the operating system (Android or iOS) may collect standard usage logs or crash reports to help troubleshoot performance bugs. These are managed by your device platform.</li>
+                </ul>
+            </section>
+
+            <!-- Section 3 -->
+            <section id="how-we-use" class="section-card">
+                <h2>How We Use Data</h2>
+                <p>Any local data stored by the game is utilized strictly for the core game mechanics. This includes:</p>
+                <ul>
+                    <li>Saving your personal highest scores so you can track your progress.</li>
+                    <li>Remembering audio preferences (mute/unmute toggles) between gameplay sessions.</li>
+                    <li>Delivering smooth offline performance.</li>
+                </ul>
+                <p>We do not sell, rent, trade, or share any player data with third-party advertisers or data brokers.</p>
+            </section>
+
+            <!-- Section 4 -->
+            <section id="cookies-storage" class="section-card">
+                <h2>Cookies & Local Storage</h2>
+                <p>Block Mania is powered by a high-performance local WebView layout. As a result, the app uses standard web browser technologies such as LocalStorage and SessionStorage to persist high scores and configurations directly on your device.</p>
+                <p>These local files are secure, sandboxed, and accessible only by the Block Mania application. They do not track your activity across other websites or applications.</p>
+            </section>
+
+            <!-- Section 5 -->
+            <section id="third-party" class="section-card">
+                <h2>Third-Party Services</h2>
+                <p>We may link to or implement third-party mobile frameworks for game rendering, audio playback, or platform utilities (such as Google Play Services or Apple App Store Services). These platforms may collect device-specific identifiers as governed by their respective privacy policies.</p>
+                <p>We recommend reviewing the privacy policies of any platform store where you downloaded Block Mania.</p>
+            </section>
+
+            <!-- Section 6 -->
+            <section id="children" class="section-card">
+                <h2>Children's Privacy</h2>
+                <p>Our game is designed to be family-friendly and accessible to audiences of all ages. Because we do not collect any personal information, we do not knowingly gather or request personal data from children under the age of 13.</p>
+                <p>If you are a parent or guardian and believe that your child has provided us with any personal data, please contact us immediately, and we will take steps to ensure it is deleted.</p>
+            </section>
+
+            <!-- Section 7 -->
+            <section id="changes" class="section-card">
+                <h2>Changes to this Policy</h2>
+                <p>We may update this Privacy Policy from time to time to reflect changes in our legal obligations or gameplay updates. When changes are made, the "Last Updated" date at the top of this document will be updated.</p>
+                <p>We encourage you to review this policy periodically to stay informed about how we protect your privacy.</p>
+            </section>
+
+            <!-- Section 8 -->
+            <section id="contact" class="section-card">
+                <h2>Contact Us</h2>
+                <p>If you have any questions, suggestions, or concerns regarding this Privacy Policy or the security of the game, please feel free to reach out to us directly:</p>
+                
+                <div class="contact-box">
+                    <p>Developer Contact Support Email:</p>
+                    <p style="font-weight: 700; color: #ffffff; font-size: 1.1rem; margin: 8px 0;">contactcontactuniocean@gmail.com</p>
+                    <a href="mailto:contactcontactuniocean@gmail.com" class="contact-btn">Send an Email</a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Block Mania. All rights reserved.</p>
+        <p style="margin-top: 10px; font-size: 0.8rem;">Designed for visual excellence and privacy security.</p>
+    </footer>
+</body>
 </html>
